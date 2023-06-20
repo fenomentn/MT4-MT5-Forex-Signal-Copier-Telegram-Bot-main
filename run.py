@@ -84,7 +84,7 @@ def ParseSignal(signal: str) -> dict:
         return {}
 
     # extracts symbol from trade signal
-    trade['Symbol'] = (signal[0].split())[-1].upper()
+    trade['Symbol'] = (signal[0].split())[0].upper()
     
     # checks if the symbol is valid, if not, returns an empty dictionary
     if(trade['Symbol'] not in SYMBOLS):
@@ -93,7 +93,7 @@ def ParseSignal(signal: str) -> dict:
     # checks wheter or not to convert entry to float because of market exectution option ("NOW")
     if(trade['OrderType'] == 'Buy' or trade['OrderType'] == 'Sell'):
         trade['Entry'] = (signal[1].split('@'))[-1].strip()
-
+    
     else:
         trade['Entry'] = float((signal[1].split('@'))[-1].strip())
     
@@ -109,8 +109,6 @@ def ParseSignal(signal: str) -> dict:
 
     return trade
 
-    print(trade)
-    print(ParseSignal)
 
 def GetTradeInformation(update: Update, trade: dict, balance: float) -> None:
     """Calculates information from given trade including stop loss and take profit in pips, posiition size, and potential loss/profit.
