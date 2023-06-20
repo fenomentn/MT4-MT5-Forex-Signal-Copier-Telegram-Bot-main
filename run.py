@@ -84,7 +84,7 @@ def ParseSignal(signal: str) -> dict:
         return {}
 
     # extracts symbol from trade signal
-    trade['Symbol'] = (signal[0].split())[0].upper()
+    trade['Symbol'] = (signal[0].split())[-1].upper()
     
     # checks if the symbol is valid, if not, returns an empty dictionary
     if(trade['Symbol'] not in SYMBOLS):
@@ -92,22 +92,23 @@ def ParseSignal(signal: str) -> dict:
     
     # checks wheter or not to convert entry to float because of market exectution option ("NOW")
     if(trade['OrderType'] == 'Buy' or trade['OrderType'] == 'Sell'):
-        trade['Entry'] = (signal[0].split('@'))[-1].strip()
+        trade['Entry'] = (signal[1].split())[-1]
     
     else:
-        trade['Entry'] = float((signal[0].split('@'))[-1].strip())
+        trade['Entry'] = float((signal[1].split())[-1])
     
-    trade['StopLoss'] = float((signal[1].split('@'))[-1].strip())
-    trade['TP'] = [float((signal[2].split('@'))[-1].strip())]
+    trade['StopLoss'] = float((signal[2].split())[-1])
+    trade['TP'] = [float((signal[3].split())[-1])]
 
     # checks if there's a fourth line and parses it for TP2
-    if(len(signal) > 3):
-        trade['TP'].append(float(signal[3].split('@')[-1].strip()))
+    if(len(signal) > 4):
+        trade['TP'].append(float(signal[4].split()[-1]))
     
     # adds risk factor to trade
     trade['RiskFactor'] = RISK_FACTOR
 
     return trade
+
 
 
 def GetTradeInformation(update: Update, trade: dict, balance: float) -> None:
