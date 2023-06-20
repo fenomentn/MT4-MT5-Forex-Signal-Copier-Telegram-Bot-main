@@ -109,7 +109,9 @@ def ParseSignal(signal: str) -> dict:
 
     return trade
 
-print(trade)
+    print(trade)
+    print(ParseSignal)
+
 def GetTradeInformation(update: Update, trade: dict, balance: float) -> None:
     """Calculates information from given trade including stop loss and take profit in pips, posiition size, and potential loss/profit.
 
