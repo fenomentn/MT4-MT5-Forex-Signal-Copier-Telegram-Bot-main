@@ -89,7 +89,7 @@ def ParseSignal(signal: str) -> dict:
     else:
         trade['Entry'] = float((signal[0].split())[-1])
 
-    trade['StopLoss'] = float((signal[1].split())[-1])
+    trade['StopLoss'] = float((signal[2].split())[-1])
     trade['TP'] = [float((signal[i].split()[-1])) for i in range(2, len(signal)) if 'TP' in signal[i]]
 
 
