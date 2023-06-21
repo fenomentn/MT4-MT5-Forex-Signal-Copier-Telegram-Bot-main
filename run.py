@@ -83,6 +83,9 @@ def ParseSignal(signal: str) -> dict:
     else:
         return {}
 
+        print(signal)
+        print(ParseSignal)
+
     # extracts symbol from trade signal
     trade['Symbol'] = (signal[0].split())[-1].upper()
     
@@ -92,24 +95,22 @@ def ParseSignal(signal: str) -> dict:
     
     # checks wheter or not to convert entry to float because of market exectution option ("NOW")
     if(trade['OrderType'] == 'Buy' or trade['OrderType'] == 'Sell'):
-        trade['Entry'] = signal[0].split('@')[1].strip()
+        trade['Entry'] = (signal[1].split())[-1]
     
     else:
-        trade['Entry'] = float(signal[0].split('@')[1].strip())
+        trade['Entry'] = float((signal[1].split())[-1])
     
     trade['StopLoss'] = float((signal[2].split())[-1])
     trade['TP'] = [float((signal[3].split())[-1])]
 
     # checks if there's a fourth line and parses it for TP2
-    trade['StopLoss'] = float(signal[1].split('@')[1].strip())
-    trade['TP'] = [float(line.split('@')[1].strip()) for line in signal[2:] if 'TP' in line]
+    if(len(signal) > 4):
+        trade['TP'].append(float(signal[4].split()[-1]))
     
     # adds risk factor to trade
     trade['RiskFactor'] = RISK_FACTOR
 
     return trade
-
-
 
 def GetTradeInformation(update: Update, trade: dict, balance: float) -> None:
     """Calculates information from given trade including stop loss and take profit in pips, posiition size, and potential loss/profit.
