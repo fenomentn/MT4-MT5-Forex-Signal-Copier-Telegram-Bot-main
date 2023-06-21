@@ -377,7 +377,7 @@ def CalculateTrade(update: Update, context: CallbackContext) -> int:
     asyncio.run(ConnectMetaTrader(update, context.user_data['trade'], False))
 
     # asks if user if they would like to enter or decline trade
-    update.effective_message.reply_text("Would you like to enter this trade?\nTo enter, select: /yes\nTo decline, select: /no")
+    update.effective_message.reply_text("Check order Position Size ...\n Would you like to enter this trade?\nTo enter, select: /yes\nTo decline, select: /no")
 
     return DECISION
 
