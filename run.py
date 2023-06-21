@@ -367,7 +367,7 @@ def CalculateTrade(update: Update, context: CallbackContext) -> int:
         
         except Exception as error:
             logger.error(f'Error: {error}')
-            errorMessage = f"There was an error parsing this trade 😕\n\nError: {error}\n\nPlease re-enter trade with this format:\n\nBUY/SELL SYMBOL\nEntry \nSL \nTP \n\nOr use the /cancel to command to cancel this action."
+            errorMessage = f"There was an error parsing this trade 😕\n\nError: {error}\n\nPlease re-enter trade with this format:\n\nSYMBOL BUY/SELL @ \n \nSL @ \nTP @ \n\nOr use the /cancel to command to cancel this action."
             update.effective_message.reply_text(errorMessage)
 
             # returns to CALCULATE to reattempt trade parsing
@@ -426,7 +426,7 @@ def help(update: Update, context: CallbackContext) -> None:
     trade_example = "Example Trades 💴:\n\n"
     market_execution_example = "Market Execution:\nEURUSD Buy NOW @ 1.2000\n\nSL @ 1.14336\n\nTP @ 1.28930\nTP @ 1.29845\n\n"
     limit_example = "Limit Execution:\nGBPUSD BUY LIMIT @ 1.14480\n\nSL @ 1.14336\n\nTP @ 1.28930\n\n"
-    note = "You are able to enter up to two take profits. If two are entered, both trades will use half of the position size, and one will use TP1 while the other uses TP2.\n\nNote: Use 'NOW' as the entry to enter a market execution trade."
+    note = "You are able to enter up to two take profits. If two are entered, both trades will use half of the position size, and one will use TP @ while the other uses TP @.\n\nNote: Use 'NOW' as the entry to enter a market execution trade."
 
     # sends messages to user
     update.effective_message.reply_text(help_message)
