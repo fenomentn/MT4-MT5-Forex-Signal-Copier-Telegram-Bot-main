@@ -85,12 +85,12 @@ def ParseSignal(signal: str) -> dict:
 
     # checks whether or not to convert entry to float because of market execution option ("NOW")
     if trade['OrderType'] == 'Buy' or trade['OrderType'] == 'Sell':
-        trade['Entry'] = (signal[0].split())[-1]
+        trade['Entry'] = float((signal[0].split('@')[-1]).strip())
     else:
-        trade['Entry'] = float((signal[0].split())[-1])
+        trade['Entry'] = float((signal[0].split('@')[-1]).strip())
 
-    trade['StopLoss'] = float((signal[2].split())[-1])
-    trade['TP'] = [float((signal[i].split()[-1])) for i in range(2, len(signal)) if 'TP' in signal[i]]
+    trade['StopLoss'] = float((signal[2].split('@')[-1]).strip())
+    trade['TP'] = [float((signal[i].split('@')[-1])) for i in range(2, len(signal)) if 'T' in signal[i]]
 
 
     # checks if there's a fourth line and parses it for TP2
