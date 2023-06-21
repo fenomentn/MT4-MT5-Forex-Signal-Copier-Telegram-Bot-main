@@ -83,8 +83,6 @@ def ParseSignal(signal: str) -> dict:
     else:
         return {}
 
-        print(signal)
-        print(ParseSignal)
 
     # extracts symbol from trade signal
     trade['Symbol'] = (signal[0].split())[-1].upper()
@@ -111,6 +109,9 @@ def ParseSignal(signal: str) -> dict:
     trade['RiskFactor'] = RISK_FACTOR
 
     return trade
+
+    trade_info = ParseSignal(signal)
+    print(trade_info)
 
 def GetTradeInformation(update: Update, trade: dict, balance: float) -> None:
     """Calculates information from given trade including stop loss and take profit in pips, posiition size, and potential loss/profit.
