@@ -77,7 +77,7 @@ def ParseSignal(signal: str) -> dict:
         return {}  # returns an empty dictionary if an invalid order type was given
 
     # extracts symbol from trade signal
-    trade['Symbol'] = (signal[0].split())[0].upper()
+    trade['Symbol'] = (signal[0].split())[0]
 
     # checks if the symbol is valid, if not, returns an empty dictionary
     if trade['Symbol'] not in SYMBOLS:
